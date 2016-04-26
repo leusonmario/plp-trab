@@ -1,0 +1,22 @@
+grammar org.xtext.example.exp1.Exp1 with org.eclipse.xtext.common.Terminals
+
+generate exp1 "http://www.xtext.org/example/exp1/Exp1"
+
+Exp1:
+	(expressoes+=Expressao)*;
+
+Expressao:
+	DecVariavel | ExpAritmetica
+;
+
+DecVariavel:
+	'var' name=ID '=' value=VALORINTEIRO;
+
+ExpAritmetica:
+	(VALORINTEIRO | sequelof=[DecVariavel]) OPERADOR (VALORINTEIRO | sequelof=[DecVariavel]);
+
+terminal OPERADOR:
+	'+' | '-';
+
+terminal VALORINTEIRO:
+	('1'..'9') ('0'..'9')*;
